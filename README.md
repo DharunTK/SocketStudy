@@ -53,6 +53,89 @@ Socket programming finds applications in various domains, including web developm
 4.	Networked Games: Online multiplayer games rely on socket programming to facilitate communication between game clients and servers.
 5.	RPC mechanisms: which allow processes to execute code on a remote server, often use socket programming for communication.
 
+##	Algorithm;
+
+### SERVER PROGRAM (server.py)
+
+1. Start the program.
+2. Import the socket module.
+3. Create a TCP socket.
+4. Set the server IP address to 127.0.0.1 and the port number to 12345.
+5. Bind the socket to the IP address and port number.
+6. Listen for a client connection.
+7. Accept the client connection.
+8. Receive the message sent by the client.
+9. Display the client's message.
+10. Send a reply to the client.
+11. Close the client connection.
+12. Close the server socket.
+13. Stop the program.
+
+### CLIENT PROGRAM (client.py)
+
+1. Start the program.
+2. Import the socket module.
+3. Create a TCP socket.
+4. Set the server IP address to 127.0.0.1 and the port number to 12345.
+5. Connect to the server.
+6. Send a message to the server.
+7. Receive the server's reply.
+8. Display the server's reply.
+9. Close the client socket.
+10. Stop the program.
+
+## CODE:
+
+### SERVER.PY
+```
+import socket
+
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+host = "127.0.0.1"
+port = 12345
+
+server_socket.bind((host, port))
+server_socket.listen(1)
+print("Server is waiting for a connection...")
+
+conn, addr = server_socket.accept()
+print("Connected to:", addr)
+
+data = conn.recv(1024).decode()
+print("Client says:", data)
+
+conn.send("Hello Client, message received!".encode())
+
+conn.close()
+server_socket.close()
+```
+### CLIENT.PY
+```
+import socket
+
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+host = "127.0.0.1"
+port = 12345
+
+client_socket.connect((host, port))
+
+client_socket.send("Hello Server!".encode())
+
+data = client_socket.recv(1024).decode()
+print("Server says:", data)
+
+client_socket.close()
+```
+
+## OUTPUT
+### SERVER SIDE
+<img width="706" height="172" alt="image" src="https://github.com/user-attachments/assets/1dec96cc-be38-409e-a30c-9d5bbbb5b529" />
+
+### CLIENT SIDE
+<img width="706" height="132" alt="image" src="https://github.com/user-attachments/assets/ac742266-b2ff-4c8b-9aa5-a703bf036f6c" />
+
 
 ## Result:
 Thus the study of Socket Programming Completed Successfully
